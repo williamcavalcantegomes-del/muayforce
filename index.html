@@ -1145,7 +1145,47 @@ function showSec(id, el) {
 }
 
 // ===== INIT =====
-renderDay('seg');
+// Auto-selecionar o dia da semana atual
+const dayMap = ['dom','seg','ter','qua','qui','sex','sab'];
+const todayKey = dayMap[new Date().getDay()];
+const dayNames = {seg:'Segunda',ter:'Terça',qua:'Quarta',qui:'Quinta',sex:'Sexta',sab:'Sábado',dom:'Domingo'};
+const dayWorkout = {
+  seg:'🥊 Peito + Tríceps',
+  ter:'💪 Costas + Bíceps',
+  qua:'🥊 Pernas — Quadríceps',
+  qui:'⚡ Ombros + Core',
+  sex:'🥊 Pernas — Posterior',
+  sab:'🔥 Fullbody + HIIT',
+  dom:'😴 Descanso Ativo'
+};
+
+// Selecionar tab do dia certo
+document.querySelectorAll('.ds-btn').forEach(btn => {
+  btn.classList.remove('active');
+  const days = ['seg','ter','qua','qui','sex','sab','dom'];
+  const idx = Array.from(document.querySelectorAll('.ds-btn')).indexOf(btn);
+  if (days[idx] === todayKey) btn.classList.add('active');
+});
+document.querySelectorAll('.tp').forEach(p => p.classList.remove('active'));
+const todayPanel = document.getElementById('tp-'+todayKey);
+if (todayPanel) todayPanel.classList.add('active');
+renderDay(todayKey);
+currentDay = todayKey;
+
+// Banner do dia atual no topo da seção treino
+const treino = document.getElementById('sec-treino');
+const banner = document.createElement('div');
+banner.style.cssText = 'background:linear-gradient(135deg,rgba(232,57,26,.12),rgba(212,168,67,.06));border:1px solid rgba(232,57,26,.25);border-radius:12px;padding:14px 16px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;';
+banner.innerHTML = `
+  <div>
+    <div style="font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:2px;margin-bottom:3px">Treino de hoje</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--text)">${dayNames[todayKey]}</div>
+    <div style="font-size:13px;color:var(--muted3);margin-top:2px">${dayWorkout[todayKey]}</div>
+  </div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--red);opacity:.4">${new Date().getDate()}</div>
+`;
+treino.insertBefore(banner, treino.firstChild.nextSibling);
+
 renderFoodLog();
 renderMedidas();
 document.getElementById('hs-done').textContent = doneExs.size;
