@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>MUAY FORCE — Willian C</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --s1: #111;
+  --s2: #181818;
+  --s3: #222;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --red: #E8391A;
+  --red2: #ff5533;
+  --gold: #D4A843;
+  --gold2: #f0c060;
+  --blue: #2E6FE8;
+  --green: #2A9D5C;
+  --green2: #3cc470;
+  --text: #f0ede8;
+  --muted: #555;
+  --muted2: #888;
+  --muted3: #aaa;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:72px;}
+
+/* HEADER */
+.app-header{position:relative;height:180px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+.hbg{position:absolute;inset:0;background:linear-gradient(160deg,#1c0600 0%,#0a0a0a 55%);}
+.hbg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(232,57,26,0.3) 0%,transparent 65%);}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:32px 32px;}
+.hcontent{position:relative;z-index:2;padding:0 20px 18px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:46px;letter-spacing:5px;line-height:1;}
+.logo span{color:var(--red);}
+.logo-pro{font-size:11px;letter-spacing:4px;color:var(--gold);font-weight:500;margin-left:2px;}
+.hsub{font-size:11px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-top:3px;}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.hstat{background:var(--s1);padding:10px 6px;text-align:center;}
+.hstat-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);display:block;line-height:1;}
+.hstat-lbl{font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:.8px;}
+
+/* NAV */
+nav{background:var(--s1);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;}
+nav::-webkit-scrollbar{display:none;}
+.nb{padding:13px 15px;font-size:11px;font-weight:500;color:var(--muted2);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;background:none;border-left:none;border-right:none;border-top:none;letter-spacing:.5px;text-transform:uppercase;}
+.nb:hover{color:var(--text);}
+.nb.active{color:var(--red);border-bottom-color:var(--red);}
+
+/* SECTIONS */
+.sec{display:none;padding:16px 16px 0;}
+.sec.active{display:block;}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--muted2);text-transform:uppercase;padding:16px 0 8px;margin:0;}
+
+/* CARDS */
+.card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.card-title{font-size:11px;font-weight:500;color:var(--muted2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+
+/* TREINO */
+.day-strip{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:12px;margin-bottom:4px;}
+.day-strip::-webkit-scrollbar{display:none;}
+.ds-btn{flex-shrink:0;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--s1);color:var(--muted2);transition:all .15s;}
+.ds-btn.active{background:var(--red);color:#fff;border-color:var(--red);}
+.ds-btn.has-mt{border-color:rgba(212,168,67,.4);}
+.tp{display:none;}
+.tp.active{display:block;}
+.ph{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center;}
+.pi{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ph-t{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;line-height:1;}
+.ph-s{font-size:11px;color:var(--muted2);margin-top:2px;}
+.bgs{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.bg{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;}
+.bg-r{background:rgba(232,57,26,.1);color:var(--red2);border:1px solid rgba(232,57,26,.2);}
+.bg-b{background:rgba(46,111,232,.1);color:#6fa3f5;border:1px solid rgba(46,111,232,.2);}
+.bg-g{background:rgba(42,157,92,.1);color:var(--green2);border:1px solid rgba(42,157,92,.2);}
+.bg-gold{background:rgba(212,168,67,.1);color:var(--gold2);border:1px solid rgba(212,168,67,.2);}
+.exc{background:var(--s1);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.exc:hover{border-color:var(--border2);}
+.exc.done{border-color:rgba(42,157,92,.4);}
+.exh{padding:13px 14px;display:flex;align-items:center;gap:10px;}
+.exn{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);min-width:20px;}
+.exi{flex:1;}
+.ex-name{font-size:13px;font-weight:500;margin-bottom:1px;}
+.ex-mu{font-size:11px;color:var(--muted2);}
+.ex-sv{text-align:right;}
+.sv-n{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--red);line-height:1;}
+.sv-l{font-size:10px;color:var(--muted);}
+.exb{display:none;padding:12px 14px;border-top:1px solid var(--border);}
+.exb.open{display:block;}
+.ex-det{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.dbox{background:var(--s2);border-radius:8px;padding:10px;text-align:center;}
+.dv{font-family:'Bebas Neue',sans-serif;font-size:17px;line-height:1;}
+.dl2{font-size:9px;color:var(--muted2);text-transform:uppercase;margin-top:2px;}
+.benef{display:flex;gap:10px;background:rgba(232,57,26,.06);border:1px solid rgba(232,57,26,.12);border-radius:8px;padding:10px;margin-bottom:8px;}
+.benef-txt{font-size:12px;line-height:1.5;color:var(--muted3);}
+.benef-txt b{color:var(--red2);font-weight:500;}
+
+/* PR INPUT */
+.pr-row{display:flex;gap:8px;align-items:center;margin-top:10px;}
+.pr-input{flex:1;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;}
+.pr-input:focus{border-color:var(--red);}
+.pr-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.pr-history{margin-top:8px;}
+.pr-entry{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.pr-entry:last-child{border-bottom:none;}
+.pr-date{color:var(--muted2);}
+.pr-val{font-family:'Space Mono',monospace;color:var(--gold);}
+.pr-best{color:var(--green2);font-size:10px;}
+
+.chk-btn{width:100%;padding:9px;border-radius:8px;border:1px solid var(--border);background:var(--s2);color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;}
+.chk-btn:hover{border-color:var(--green);color:var(--green2);}
+.exc.done .chk-btn{background:rgba(42,157,92,.08);border-color:rgba(42,157,92,.3);color:var(--green2);}
+
+/* BODY TRACKER */
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.met-card{background:var(--s2);border-radius:10px;padding:14px;text-align:center;}
+.met-val{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;}
+.met-unit{font-size:12px;color:var(--muted2);}
+.met-lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.met-delta{font-size:11px;margin-top:4px;}
+.delta-down{color:var(--green2);}
+.delta-up{color:var(--red2);}
+.input-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.inp-wrap{display:flex;flex-direction:column;gap:4px;}
+.inp-lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.8px;}
+.inp{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;width:100%;}
+.inp:focus{border-color:var(--gold);}
+.save-btn{width:100%;padding:11px;border-radius:8px;background:var(--gold);color:#111;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;}
+.save-btn:hover{background:var(--gold2);}
+.chart-wrap{position:relative;height:140px;margin-top:8px;}
+canvas{border-radius:8px;}
+.history-list{max-height:200px;overflow-y:auto;scrollbar-width:thin;}
+.hist-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.hist-row:last-child{border-bottom:none;}
+.hist-date{color:var(--muted2);}
+.hist-vals{display:flex;gap:12px;}
+.hist-val{font-family:'Space Mono',monospace;font-size:11px;}
+.hist-val span{color:var(--muted2);font-family:'DM Sans',sans-serif;}
+
+/* CALORIE CALC */
+.cal-big{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--red);line-height:1;text-align:center;margin:12px 0 4px;}
+.cal-sub{text-align:center;font-size:12px;color:var(--muted2);margin-bottom:16px;}
+.macro-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.macro-box{border-radius:10px;padding:14px 10px;text-align:center;}
+.mb-prot{background:rgba(232,57,26,.08);border:1px solid rgba(232,57,26,.15);}
+.mb-carb{background:rgba(46,111,232,.08);border:1px solid rgba(46,111,232,.15);}
+.mb-fat{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);}
+.mb-val{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;}
+.mb-prot .mb-val{color:var(--red2);}
+.mb-carb .mb-val{color:#6fa3f5;}
+.mb-fat .mb-val{color:var(--gold2);}
+.mb-lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;margin-top:2px;}
+.toggle-row{display:flex;gap:6px;margin-bottom:12px;}
+.tgl{flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--s2);color:var(--muted2);font-size:12px;font-weight:500;cursor:pointer;text-align:center;transition:all .15s;}
+.tgl.active{background:var(--red);color:#fff;border-color:var(--red);}
+.food-log{margin-top:8px;}
+.food-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.food-item:last-child{border-bottom:none;}
+.food-kcal{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);}
+.del-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 6px;}
+.add-food-row{display:flex;gap:6px;margin-top:8px;}
+.add-food-row .inp{flex:2;}
+.add-food-row .inp.sm{flex:1;}
+
+/* MEAL PLAN */
+.meal-day{margin-bottom:16px;}
+.meal-day-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;}
+.meal{background:var(--s2);border-radius:8px;padding:10px 12px;margin-bottom:6px;display:flex;gap:10px;align-items:flex-start;}
+.meal-time{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted2);min-width:52px;padding-top:2px;}
+.meal-name{font-size:13px;font-weight:500;margin-bottom:2px;}
+.meal-desc{font-size:11px;color:var(--muted2);line-height:1.5;}
+.meal-kcal{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);white-space:nowrap;margin-left:auto;padding-top:2px;}
+
+/* AI PLATE */
+.upload-area{border:2px dashed var(--border2);border-radius:12px;padding:32px 16px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:12px;}
+.upload-area:hover{border-color:var(--red);background:rgba(232,57,26,.04);}
+.upload-area.dragover{border-color:var(--red);background:rgba(232,57,26,.08);}
+.upload-icon{font-size:40px;margin-bottom:10px;}
+.upload-title{font-size:14px;font-weight:500;margin-bottom:4px;}
+.upload-sub{font-size:12px;color:var(--muted2);}
+#plate-input{display:none;}
+.preview-img{width:100%;border-radius:10px;margin-bottom:12px;display:none;}
+.ai-result{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;}
+.ai-loading{text-align:center;padding:24px;color:var(--muted2);}
+.spin{display:inline-block;width:24px;height:24px;border:2px solid var(--border2);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ai-food-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.ai-food-row:last-child{border-bottom:none;}
+.ai-kcal{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);}
+.ai-total{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border2);}
+.ai-total-lbl{font-size:12px;font-weight:500;}
+.ai-total-val{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--red);}
+.analyze-btn{width:100%;padding:12px;border-radius:8px;background:linear-gradient(135deg,var(--red),#c02800);color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:none;}
+.analyze-btn:hover{background:linear-gradient(135deg,var(--red2),var(--red));}
+.analyze-btn.show{display:block;}
+.fit-score{text-align:center;margin-top:10px;}
+.fit-score-num{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;}
+.fit-score-lbl{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--s3);border-radius:4px;height:8px;margin:10px 0;overflow:hidden;}
+.score-bar{height:100%;border-radius:4px;transition:width 1s ease;}
+
+/* TIMER */
+.timer-presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.tpreset{flex:1;min-width:80px;padding:10px 8px;border-radius:8px;border:1px solid var(--border);background:var(--s2);color:var(--muted2);font-size:11px;font-weight:500;cursor:pointer;text-align:center;transition:all .15s;}
+.tpreset:hover,.tpreset.active{border-color:var(--red);color:var(--red);background:rgba(232,57,26,.08);}
+.timer-main{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:24px 16px;text-align:center;margin-bottom:12px;}
+.round-row{display:flex;gap:20px;justify-content:center;margin-bottom:16px;}
+.ri{text-align:center;}
+.rv{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--text);line-height:1;}
+.rl{font-size:10px;color:var(--muted);text-transform:uppercase;}
+.t-disp{font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:4px;line-height:1;transition:color .3s;}
+.t-disp.work{color:var(--red);}
+.t-disp.rest{color:var(--green2);}
+.t-lbl{font-size:11px;letter-spacing:3px;color:var(--muted2);text-transform:uppercase;margin:6px 0 20px;}
+.timer-btns{display:flex;gap:10px;justify-content:center;}
+.tbtn{padding:12px 26px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid var(--border);}
+.tbtn.go{background:var(--red);color:#fff;border-color:var(--red);}
+.tbtn.go:hover{background:var(--red2);}
+.tbtn.rst{background:var(--s2);color:var(--muted2);}
+.round-dots{display:flex;gap:6px;flex-wrap:wrap;}
+.rdot{width:30px;height:30px;border-radius:50%;background:rgba(232,57,26,.15);border:1px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--red);font-family:'Space Mono',monospace;}
+
+/* BOTTOM BAR */
+.bbar{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,8,.96);backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;padding:6px 0 10px;z-index:200;}
+.bbb{flex:1;text-align:center;cursor:pointer;padding:5px 0;transition:all .15s;}
+.bbb-icon{font-size:18px;display:block;margin-bottom:2px;}
+.bbb-lbl{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.bbb.active .bbb-lbl{color:var(--red);}
+
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.sec.active{animation:fadein .2s ease;}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="hbg"></div>
+  <div class="hgrid"></div>
+  <div class="hcontent">
+    <div class="logo">MUAY<span>FORCE</span> <span class="logo-pro">Willian C</span></div>
+    <div class="hsub">Treino · Nutrição · Evolução</div>
+  </div>
+</div>
+<div class="hstats">
+  <div class="hstat"><span class="hstat-val">6</span><span class="hstat-lbl">Dias/Sem</span></div>
+  <div class="hstat"><span class="hstat-val" id="hs-done">0</span><span class="hstat-lbl">Feitos Hoje</span></div>
+  <div class="hstat"><span class="hstat-val" id="hs-kcal">2800</span><span class="hstat-lbl">Meta kcal</span></div>
+  <div class="hstat"><span class="hstat-val" id="hs-peso">125</span><span class="hstat-lbl">kg Atual</span></div>
+</div>
+
+<nav>
+  <button class="nb active" onclick="showSec('treino',this)">Treino</button>
+  <button class="nb" onclick="showSec('corpo',this)">Corpo</button>
+  <button class="nb" onclick="showSec('calorias',this)">Calorias</button>
+  <button class="nb" onclick="showSec('refeicoes',this)">Refeições</button>
+  <button class="nb" onclick="showSec('prato',this)">📷 Prato IA</button>
+  <button class="nb" onclick="showSec('shape',this)">💪 Shape IA</button>
+  <button class="nb" onclick="showSec('timer',this)">Timer</button>
+</nav>
+
+<!-- ======= TREINO ======= -->
+<div id="sec-treino" class="sec active">
+  <p class="sh">Semana de Treino</p>
+  <div class="day-strip">
+    <div class="ds-btn active has-mt" onclick="selDay('seg',this)">🥊 Segunda</div>
+    <div class="ds-btn" onclick="selDay('ter',this)">Terça</div>
+    <div class="ds-btn has-mt" onclick="selDay('qua',this)">🥊 Quarta</div>
+    <div class="ds-btn" onclick="selDay('qui',this)">Quinta</div>
+    <div class="ds-btn has-mt" onclick="selDay('sex',this)">🥊 Sexta</div>
+    <div class="ds-btn" onclick="selDay('sab',this)">Sábado</div>
+    <div class="ds-btn" onclick="selDay('dom',this)">Domingo</div>
+  </div>
+
+  <div id="tp-seg" class="tp active">
+    <div class="ph"><div class="pi" style="background:rgba(232,57,26,.12)">🥊</div><div><div class="ph-t">Peito + Tríceps</div><div class="ph-s">Força de empurrar — soco e jab</div><div class="bgs"><span class="bg bg-gold">Muay Thai</span><span class="bg bg-b">Musculação</span><span class="bg bg-r">Alta intensidade</span></div></div></div>
+    <div id="ex-seg"></div>
+  </div>
+  <div id="tp-ter" class="tp">
+    <div class="ph"><div class="pi" style="background:rgba(46,111,232,.12)">🏋️</div><div><div class="ph-t">Costas + Bíceps</div><div class="ph-s">Puxada e clinch dominante</div><div class="bgs"><span class="bg bg-b">Musculação</span><span class="bg bg-g">Clinch</span></div></div></div>
+    <div id="ex-ter"></div>
+  </div>
+  <div id="tp-qua" class="tp">
+    <div class="ph"><div class="pi" style="background:rgba(232,57,26,.12)">🦵</div><div><div class="ph-t">Pernas — Quadríceps</div><div class="ph-s">Base e potência de golpe</div><div class="bgs"><span class="bg bg-gold">Muay Thai</span><span class="bg bg-b">Musculação</span><span class="bg bg-r">Alta intensidade</span></div></div></div>
+    <div id="ex-qua"></div>
+  </div>
+  <div id="tp-qui" class="tp">
+    <div class="ph"><div class="pi" style="background:rgba(212,168,67,.12)">⚡</div><div><div class="ph-t">Ombros + Core</div><div class="ph-s">Rotação e torque</div><div class="bgs"><span class="bg bg-b">Musculação</span><span class="bg bg-g">Geração de força</span></div></div></div>
+    <div id="ex-qui"></div>
+  </div>
+  <div id="tp-sex" class="tp">
+    <div class="ph"><div class="pi" style="background:rgba(232,57,26,.12)">💪</div><div><div class="ph-t">Pernas — Posterior</div><div class="ph-s">Glúteo e isquio — chute explosivo</div><div class="bgs"><span class="bg bg-gold">Muay Thai</span><span class="bg bg-b">Musculação</span></div></div></div>
+    <div id="ex-sex"></div>
+  </div>
+  <div id="tp-sab" class="tp">
+    <div class="ph"><div class="pi" style="background:rgba(212,168,67,.12)">🔥</div><div><div class="ph-t">Fullbody + HIIT</div><div class="ph-s">Queima e condicionamento</div><div class="bgs"><span class="bg bg-r">Queima gordura</span><span class="bg bg-g">Condicionamento</span></div></div></div>
+    <div id="ex-sab"></div>
+  </div>
+  <div id="tp-dom" class="tp">
+    <div style="background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:24px;text-align:center;">
+      <div style="font-size:48px;margin-bottom:12px">🧘</div>
+      <div style="font-size:16px;font-weight:500;margin-bottom:8px">Descanso Ativo</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.8">Alongamento global 20min<br>Caminhada leve 30min<br>Mobilidade quadril e ombros<br>Foam roller nas pernas</div>
+      <div style="margin-top:14px;padding:10px;background:rgba(42,157,92,.08);border:1px solid rgba(42,157,92,.2);border-radius:8px;font-size:12px;color:var(--green2)">O descanso é onde o músculo cresce. Não pule.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= CORPO ======= -->
+<div id="sec-corpo" class="sec">
+  <p class="sh">Medidas Corporais</p>
+  <div class="card">
+    <div class="metric-grid">
+      <div class="met-card"><div class="met-val" id="mv-peso" style="color:var(--red)">125</div><div class="met-unit">kg</div><div class="met-lbl">Peso</div><div class="met-delta" id="md-peso">—</div></div>
+      <div class="met-card"><div class="met-val" id="mv-cintura" style="color:var(--gold)">—</div><div class="met-unit">cm</div><div class="met-lbl">Cintura</div><div class="met-delta" id="md-cintura">—</div></div>
+      <div class="met-card"><div class="met-val" id="mv-peit" style="color:var(--blue)">—</div><div class="met-unit">cm</div><div class="met-lbl">Peito</div><div class="met-delta" id="md-peit">—</div></div>
+      <div class="met-card"><div class="met-val" id="mv-braco" style="color:var(--green2)">—</div><div class="met-unit">cm</div><div class="met-lbl">Braço</div><div class="met-delta" id="md-braco">—</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Registrar medidas de hoje</div>
+    <div class="input-row">
+      <div class="inp-wrap"><label class="inp-lbl">Peso (kg)</label><input class="inp" id="in-peso" type="number" placeholder="125" step="0.1"></div>
+      <div class="inp-wrap"><label class="inp-lbl">Cintura (cm)</label><input class="inp" id="in-cintura" type="number" placeholder="105"></div>
+      <div class="inp-wrap"><label class="inp-lbl">Peito (cm)</label><input class="inp" id="in-peit" type="number" placeholder="118"></div>
+    </div>
+    <div class="input-row">
+      <div class="inp-wrap"><label class="inp-lbl">Braço (cm)</label><input class="inp" id="in-braco" type="number" placeholder="42"></div>
+      <div class="inp-wrap"><label class="inp-lbl">Quadril (cm)</label><input class="inp" id="in-quad" type="number" placeholder="115"></div>
+      <div class="inp-wrap"><label class="inp-lbl">Coxa (cm)</label><input class="inp" id="in-coxa" type="number" placeholder="68"></div>
+    </div>
+    <button class="save-btn" onclick="saveMedidas()">Salvar Medidas</button>
+  </div>
+  <div class="card">
+    <div class="card-title">Histórico</div>
+    <div class="history-list" id="medidas-hist"><div style="color:var(--muted2);font-size:13px;text-align:center;padding:16px">Nenhum registro ainda</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Evolução do Peso</div>
+    <div class="chart-wrap"><canvas id="peso-chart"></canvas></div>
+  </div>
+</div>
+
+<!-- ======= CALORIAS ======= -->
+<div id="sec-calorias" class="sec">
+  <p class="sh">Calculadora de Calorias</p>
+  <div class="card">
+    <div class="card-title">Tipo de dia</div>
+    <div class="toggle-row">
+      <div class="tgl active" onclick="setDayType('muay',this)">🥊 Muay Thai</div>
+      <div class="tgl" onclick="setDayType('musc',this)">💪 Só Musculação</div>
+      <div class="tgl" onclick="setDayType('rest',this)">😴 Descanso</div>
+    </div>
+    <div class="cal-big" id="cal-total">3.400</div>
+    <div class="cal-sub" id="cal-desc">Dia de Muay Thai — gasto elevado, mais carbo</div>
+    <div class="macro-row">
+      <div class="macro-box mb-prot"><div class="mb-val" id="cal-prot">260g</div><div class="mb-lbl">Proteína</div></div>
+      <div class="macro-box mb-carb"><div class="mb-val" id="cal-carb">340g</div><div class="mb-lbl">Carboidrato</div></div>
+      <div class="macro-box mb-fat"><div class="mb-val" id="cal-fat">90g</div><div class="mb-lbl">Gordura</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Log de Alimentos de Hoje</div>
+    <div class="add-food-row">
+      <input class="inp" id="food-name" placeholder="Ex: Frango grelhado 200g">
+      <input class="inp sm" id="food-kcal" type="number" placeholder="kcal">
+      <button class="pr-btn" onclick="addFood()">+</button>
+    </div>
+    <div class="food-log" id="food-log"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+      <span style="font-size:12px;color:var(--muted2)">Total consumido</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--green2)" id="consumed-total">0 kcal</span>
+    </div>
+    <div class="score-bar-wrap"><div class="score-bar" id="cal-progress-bar" style="width:0%;background:var(--green2)"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted2)"><span>0</span><span id="cal-goal-lbl">Meta: 3400 kcal</span></div>
+  </div>
+</div>
+
+<!-- ======= REFEIÇÕES ======= -->
+<div id="sec-refeicoes" class="sec">
+  <p class="sh">Plano Alimentar Semanal</p>
+  <div class="card" style="background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.2)">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:24px">🎯</div>
+      <div>
+        <div style="font-size:13px;font-weight:500;margin-bottom:2px">Meta: Recomposição Corporal</div>
+        <div style="font-size:11px;color:var(--muted2)">Perder gordura • Manter massa • Ganhar músculo</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sh">Dias de Muay Thai (Seg/Qua/Sex)</p>
+  <div class="card">
+    <div class="meal"><div class="meal-time">07:00</div><div><div class="meal-name">Café da manhã</div><div class="meal-desc">3 ovos mexidos + 2 fatias pão integral + 1 banana + café sem açúcar</div></div><div class="meal-kcal">520</div></div>
+    <div class="meal"><div class="meal-time">10:00</div><div><div class="meal-name">Lanche pré-treino</div><div class="meal-desc">150g frango + 80g arroz + 1 fruta</div></div><div class="meal-kcal">480</div></div>
+    <div class="meal"><div class="meal-time">12:30</div><div><div class="meal-name">Almoço</div><div class="meal-desc">200g frango ou patinho + 120g arroz + feijão + salada à vontade + azeite</div></div><div class="meal-kcal">720</div></div>
+    <div class="meal"><div class="meal-time">16:00</div><div><div class="meal-name">Pré-Muay Thai</div><div class="meal-desc">Whey + 1 banana + 30g aveia (1h antes)</div></div><div class="meal-kcal">400</div></div>
+    <div class="meal"><div class="meal-time">20:00</div><div><div class="meal-name">Pós-treino</div><div class="meal-desc">200g frango/atum + 100g batata doce + legumes</div></div><div class="meal-kcal">600</div></div>
+    <div class="meal"><div class="meal-time">22:30</div><div><div class="meal-name">Ceia</div><div class="meal-desc">4 claras + 1 ovo + 30g queijo cottage</div></div><div class="meal-kcal">200</div></div>
+    <div style="display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);font-size:12px"><span style="color:var(--muted2)">Total do dia</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold)">~2.920 kcal</span></div>
+  </div>
+
+  <p class="sh">Dias só de Musculação (Ter/Qui/Sáb)</p>
+  <div class="card">
+    <div class="meal"><div class="meal-time">07:00</div><div><div class="meal-name">Café da manhã</div><div class="meal-desc">Omelete 3 ovos + 1 fatia pão integral + café</div></div><div class="meal-kcal">420</div></div>
+    <div class="meal"><div class="meal-time">10:00</div><div><div class="meal-name">Lanche</div><div class="meal-desc">1 scoop Whey + 10 castanhas + 1 maçã</div></div><div class="meal-kcal">320</div></div>
+    <div class="meal"><div class="meal-time">12:30</div><div><div class="meal-name">Almoço</div><div class="meal-desc">180g carne magra + 100g arroz + feijão + salada + azeite</div></div><div class="meal-kcal">650</div></div>
+    <div class="meal"><div class="meal-time">15:30</div><div><div class="meal-name">Pré-treino</div><div class="meal-desc">Whey + 1 banana</div></div><div class="meal-kcal">280</div></div>
+    <div class="meal"><div class="meal-time">19:00</div><div><div class="meal-name">Jantar pós-treino</div><div class="meal-desc">200g atum/frango + 80g batata doce + brócolis</div></div><div class="meal-kcal">520</div></div>
+    <div class="meal"><div class="meal-time">22:00</div><div><div class="meal-name">Ceia</div><div class="meal-desc">200g cottage ou iogurte grego natural + 1 col canela</div></div><div class="meal-kcal">160</div></div>
+    <div style="display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);font-size:12px"><span style="color:var(--muted2)">Total do dia</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold)">~2.350 kcal</span></div>
+  </div>
+
+  <p class="sh">Domingo — Descanso</p>
+  <div class="card">
+    <div class="meal"><div class="meal-time">08:00</div><div><div class="meal-name">Café reforçado</div><div class="meal-desc">Tapioca 2 unidades + 2 ovos + abacate + café</div></div><div class="meal-kcal">580</div></div>
+    <div class="meal"><div class="meal-time">13:00</div><div><div class="meal-name">Almoço livre controlado</div><div class="meal-desc">Proteína + carboidrato à escolha — sem exagero</div></div><div class="meal-kcal">700</div></div>
+    <div class="meal"><div class="meal-time">19:00</div><div><div class="meal-name">Jantar leve</div><div class="meal-desc">Sopa de legumes + frango desfiado ou salada completa</div></div><div class="meal-kcal">420</div></div>
+    <div style="display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);font-size:12px"><span style="color:var(--muted2)">Total do dia</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold)">~1.700 kcal</span></div>
+  </div>
+</div>
+
+<!-- ======= PRATO IA ======= -->
+<div id="sec-prato" class="sec">
+  <p class="sh">Análise de Prato com IA</p>
+  <div class="card">
+    <div class="upload-area" id="upload-area" onclick="document.getElementById('plate-input').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
+      <div class="upload-icon">📸</div>
+      <div class="upload-title">Fotografe seu prato</div>
+      <div class="upload-sub">Toque para escolher uma foto ou arraste aqui<br>A IA identifica os alimentos e calcula as calorias</div>
+    </div>
+    <input type="file" id="plate-input" accept="image/*" onchange="handlePlateFile(event)">
+    <img id="preview-img" class="preview-img" alt="Preview">
+    <button class="analyze-btn" id="analyze-btn" onclick="analyzePlate()">🧠 Analisar com IA</button>
+    <div id="ai-result-area"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Como usar</div>
+    <div style="font-size:13px;color:var(--muted2);line-height:1.8">
+      1. Fotografe seu prato antes de comer<br>
+      2. Toque em "Analisar com IA"<br>
+      3. A IA identifica cada alimento e estima as calorias<br>
+      4. Os valores são adicionados ao seu log do dia automaticamente<br>
+      <div style="margin-top:10px;padding:10px;background:rgba(232,57,26,.06);border:1px solid rgba(232,57,26,.12);border-radius:8px;font-size:11px;color:var(--muted3)">Estimativas baseadas em porções visuais. Para maior precisão, use uma balança alimentar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= SHAPE IA ======= -->
+<div id="sec-shape" class="sec">
+  <p class="sh">Análise de Shape com IA</p>
+  <div class="card" style="background:linear-gradient(135deg,rgba(232,57,26,.08),rgba(212,168,67,.05));border-color:rgba(232,57,26,.2)">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="font-size:32px">🤖</div>
+      <div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:3px">IA Analisa seu Shape</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5">Envie uma foto de frente, lado ou costas. A IA avalia composição, pontos fortes, desequilíbrios e ajustes pro seu treino de Muay Thai.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Ângulo da foto</div>
+    <div style="display:flex;gap:6px;margin-bottom:14px">
+      <div class="tgl active" id="ang-frente" onclick="setShapeAngle('frente',this)">Frente</div>
+      <div class="tgl" id="ang-lado" onclick="setShapeAngle('lado',this)">Lado</div>
+      <div class="tgl" id="ang-costas" onclick="setShapeAngle('costas',this)">Costas</div>
+    </div>
+    <div class="upload-area" id="shape-upload-area" onclick="document.getElementById('shape-input').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleShapeDrop(event)">
+      <div class="upload-icon">🏋️</div>
+      <div class="upload-title">Enviar foto do corpo</div>
+      <div class="upload-sub">Foto de corpo inteiro, boa iluminação<br>Quanto mais clara, mais precisa a análise</div>
+    </div>
+    <input type="file" id="shape-input" accept="image/*" onchange="handleShapeFile(event)">
+    <img id="shape-preview" class="preview-img" alt="Preview shape">
+    <button class="analyze-btn" id="shape-analyze-btn" onclick="analyzeShape()">💪 Analisar Shape com IA</button>
+    <div id="shape-result-area"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">O que a IA avalia</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--muted2);line-height:1.7">
+      <div style="background:var(--s2);border-radius:8px;padding:10px"><div style="color:var(--gold);font-weight:500;margin-bottom:4px;font-size:11px">COMPOSIÇÃO</div>Estimativa % gordura<br>Massa muscular visível<br>Distribuição de gordura<br>Proporção corporal</div>
+      <div style="background:var(--s2);border-radius:8px;padding:10px"><div style="color:var(--red2);font-weight:500;margin-bottom:4px;font-size:11px">MUAY THAI</div>Grupos prioritários<br>Desequilíbrios musculares<br>Postura e base<br>Ajustes no treino</div>
+      <div style="background:var(--s2);border-radius:8px;padding:10px"><div style="color:var(--green2);font-weight:500;margin-bottom:4px;font-size:11px">PONTOS FORTES</div>Grupos bem desenvolvidos<br>Vantagens estruturais<br>Base para o combate</div>
+      <div style="background:var(--s2);border-radius:8px;padding:10px"><div style="color:#6fa3f5;font-weight:500;margin-bottom:4px;font-size:11px">PLANO DE AÇÃO</div>Prioridades de treino<br>Ajustes de volume<br>Foco próximas 4 semanas</div>
+    </div>
+  </div>
+  <div class="card" id="shape-history-card" style="display:none">
+    <div class="card-title">Histórico de Análises</div>
+    <div id="shape-history"></div>
+  </div>
+</div>
+
+<!-- ======= TIMER ======= -->
+<div id="sec-timer" class="sec">
+  <p class="sh">Timer de Treino</p>
+  <div class="timer-presets">
+    <div class="tpreset active" onclick="setPreset(45,15,this)">🥊 Muay Thai<br><small>45s/15s</small></div>
+    <div class="tpreset" onclick="setPreset(40,20,this)">🔥 HIIT<br><small>40s/20s</small></div>
+    <div class="tpreset" onclick="setPreset(60,60,this)">💪 Musculação<br><small>60s/60s</small></div>
+    <div class="tpreset" onclick="setPreset(180,60,this)">⏱ Rounds<br><small>3min/1min</small></div>
+  </div>
+  <div class="timer-main">
+    <div class="round-row">
+      <div class="ri"><div class="rv" id="t-round">1</div><div class="rl">Round</div></div>
+      <div class="ri"><div class="rv" id="t-max">8</div><div class="rl">Total</div></div>
+      <div class="ri"><div class="rv" id="t-completed">0</div><div class="rl">Feitos</div></div>
+    </div>
+    <div class="t-disp work" id="t-disp">00:45</div>
+    <div class="t-lbl" id="t-lbl">TRABALHO</div>
+    <div class="timer-btns">
+      <button class="tbtn go" id="t-start" onclick="toggleTimer()">INICIAR</button>
+      <button class="tbtn rst" onclick="resetTimer()">RESETAR</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Rounds Completados</div>
+    <div class="round-dots" id="round-dots"></div>
+  </div>
+</div>
+
+<div class="bbar">
+  <div class="bbb active" onclick="showSec('treino',this)"><span class="bbb-icon">📋</span><span class="bbb-lbl">Treino</span></div>
+  <div class="bbb" onclick="showSec('corpo',this)"><span class="bbb-icon">📊</span><span class="bbb-lbl">Corpo</span></div>
+  <div class="bbb" onclick="showSec('calorias',this)"><span class="bbb-icon">🔢</span><span class="bbb-lbl">Calorias</span></div>
+  <div class="bbb" onclick="showSec('refeicoes',this)"><span class="bbb-icon">🥗</span><span class="bbb-lbl">Refeições</span></div>
+  <div class="bbb" onclick="showSec('prato',this)"><span class="bbb-icon">📷</span><span class="bbb-lbl">Prato IA</span></div>
+  <div class="bbb" onclick="showSec('shape',this)"><span class="bbb-icon">💪</span><span class="bbb-lbl">Shape IA</span></div>
+  <div class="bbb" onclick="showSec('timer',this)"><span class="bbb-icon">⏱</span><span class="bbb-lbl">Timer</span></div>
+</div>
+
+<script>
+// ===== DATA =====
+const TREINOS = {
+  seg:[
+    {name:'Supino Reto Barra',mu:'Peitoral maior',s:'4',r:'6–8',rest:'90s',ben:'Força no direto e jab — extensão do peitoral replica o padrão motor do soco.'},
+    {name:'Supino Inclinado Halteres',mu:'Peitoral superior + estabilizadores',s:'3',r:'10',rest:'75s',ben:'Estabilidade escapular para manter guarda alta por múltiplos rounds.'},
+    {name:'Crossover Cabo (baixo→cima)',mu:'Peitoral + deltóide anterior',s:'3',r:'12',rest:'60s',ben:'Ângulo diagonal replica padrão de uppercut e soco de cima.'},
+    {name:'Push Press',mu:'Ombro + tríceps + quad',s:'3',r:'8',rest:'90s',ben:'Explosão de quadril + ombro — idêntico à geração de força em qualquer golpe.'},
+    {name:'Tríceps Corda Cabo',mu:'Tríceps — cabeça longa e lateral',s:'4',r:'12',rest:'60s',ben:'Extensão final do soco. Tríceps forte = mais velocidade e snap no impacto.'},
+    {name:'Tríceps Francês Haltere',mu:'Tríceps — cabeça longa',s:'3',r:'12',rest:'60s',ben:'Força isométrica de cotovelada — mais estrutura e dano no golpe.'},
+  ],
+  ter:[
+    {name:'Puxada Frontal Aberta',mu:'Latíssimo, redondo maior',s:'4',r:'8–10',rest:'75s',ben:'Força de puxada no clinch — controlar e puxar a cabeça do adversário.'},
+    {name:'Remada Curvada Barra',mu:'Trapézio, rombóides, dorsais',s:'4',r:'8',rest:'90s',ben:'Espessura de costas que absorve impacto de socos e empurrões.'},
+    {name:'Remada Unilateral Haltere',mu:'Dorsais + anti-rotação',s:'3',r:'10 cada',rest:'60s',ben:'Padrão anti-rotacional — manter estrutura ao receber golpe forte ao corpo.'},
+    {name:'Pullover Haltere',mu:'Lat + serrátil + core',s:'3',r:'12',rest:'60s',ben:'Conecta latíssimo ao core, potencializando rotação em socos.'},
+    {name:'Rosca Direta Barra',mu:'Bíceps braquial',s:'3',r:'10',rest:'60s',ben:'Força de puxada no clinch. Necessária para manter pescoço do adversário baixo.'},
+    {name:'Rosca Martelo Haltere',mu:'Braquiorradial + antebraço',s:'3',r:'12',rest:'60s',ben:'Força de agarre e antebraço — fechar o punho com potência e segurar no clinch.'},
+  ],
+  qua:[
+    {name:'Agachamento Livre',mu:'Quadríceps, glúteo, lombar',s:'4',r:'6–8',rest:'120s',ben:'Motor primário de todos os golpes. 100% da potência começa no quadril.'},
+    {name:'Leg Press 45°',mu:'Quadríceps — volume',s:'4',r:'10–12',rest:'75s',ben:'Volume de quad que sustenta avanços explosivos e troca de base em combate.'},
+    {name:'Afundo com Halteres',mu:'Quad + equilíbrio unilateral',s:'3',r:'10 cada',rest:'60s',ben:'Padrão unilateral que replica ginga e troca de base. Melhora estabilidade.'},
+    {name:'Box Jump',mu:'Potência explosiva total',s:'4',r:'5',rest:'90s',ben:'Velocidade de contração — fundamental para entrada rápida e distância de combate.'},
+    {name:'Extensora (moderada)',mu:'Quadríceps — isolamento',s:'3',r:'15',rest:'60s',ben:'Estabilidade do joelho durante chutes — previne lesão no giro e impacto.'},
+    {name:'Panturrilha em Pé',mu:'Gastrocnêmio + sóleo',s:'4',r:'15–20',rest:'60s',ben:'Impulso no antepé usado em TODOS os golpes. A ginga depende da panturrilha.'},
+  ],
+  qui:[
+    {name:'Desenvolvimento Militar Barra',mu:'Deltoide + trapézio + tríceps',s:'4',r:'8',rest:'90s',ben:'Força para cotovelada alta e guarda — deltóide forte sustenta o golpe.'},
+    {name:'Elevação Lateral Haltere',mu:'Deltoide médio',s:'4',r:'12',rest:'60s',ben:'Mantém guarda levantada por 3, 5, 10 rounds. Sem ele os braços caem.'},
+    {name:'Face Pull Cabo',mu:'Manguito rotador + delt posterior',s:'3',r:'15',rest:'45s',ben:'Saúde preventiva do ombro. Muay Thai sobrecarrega o manguito — essencial.'},
+    {name:'Prancha com Rotação',mu:'Core anti-rotacional',s:'3',r:'30s cada',rest:'45s',ben:'Gera torque necessário para socos potentes. O soco não vem do braço — vem do core.'},
+    {name:'Rotação Medicine Ball',mu:'Oblíquos + quadrado lombar',s:'3',r:'10 cada',rest:'60s',ben:'Transferência direta para giro do gancho e chute circular.'},
+    {name:'Elevação de Perna',mu:'Reto abdominal inferior',s:'3',r:'15',rest:'45s',ben:'Core inferior que estabiliza o clinch e sustenta posição de guarda.'},
+    {name:'Pallof Press Cabo',mu:'Core lateral anti-flexão',s:'3',r:'12 cada',rest:'45s',ben:'Resistência ao desequilíbrio após receber golpe. Previne queda.'},
+  ],
+  sex:[
+    {name:'Stiff Barra',mu:'Isquiossurais + glúteo + lombar',s:'4',r:'10',rest:'90s',ben:'Força de extensão de quadril é o motor do chute circular.'},
+    {name:'Hip Thrust Barra',mu:'Glúteo máximo',s:'4',r:'10',rest:'75s',ben:'Maior músculo do corpo. Toda explosão de quadril nos golpes passa por aqui.'},
+    {name:'Flexora Deitado',mu:'Isquiossurais isolados',s:'4',r:'12',rest:'60s',ben:'Velocidade de recolhimento do chute — isquio fraco = chute lento e risco de lesão.'},
+    {name:'Bom Dia (leve)',mu:'Lombar + posterior da coxa',s:'3',r:'12',rest:'75s',ben:'Proteção lombar em combate. Receber chutes na coxa exige lombar forte.'},
+    {name:'Cadeira Abdutora',mu:'Glúteo médio + abdutores',s:'3',r:'15',rest:'45s',ben:'Estabilidade lateral de quadril — necessária no chute lateral.'},
+    {name:'Panturrilha Sentado',mu:'Sóleo — resistência',s:'4',r:'20',rest:'45s',ben:'Resistência em rounds longos. O sóleo sustenta o peso corporal por horas.'},
+  ],
+  sab:[
+    {name:'Agachamento Goblet',mu:'Fullbody — ativação',s:'3',r:'15',rest:'45s',ben:'Ativação total com postura de combate. Inicia o metabolismo para o HIIT.'},
+    {name:'Remada com Haltere',mu:'Costas — manutenção',s:'3',r:'12 cada',rest:'45s',ben:'Manutenção de volume sem sobrecarga após semana intensa.'},
+    {name:'Press Haltere Sentado',mu:'Ombro — manutenção',s:'3',r:'12',rest:'45s',ben:'Volume baixo para manutenção. Não é dia de esforço máximo.'},
+    {name:'Agachamento Sumô + Elevação',mu:'Perna + ombro — metabólico',s:'3',r:'12',rest:'30s',ben:'Combo metabólico que acelera frequência cardíaca para o HIIT.'},
+    {name:'HIIT: Burpee → Soco → Joelho Alto',mu:'Corpo todo — aeróbico',s:'5 rounds',r:'40s / 20s desc',rest:'—',ben:'Replicar esforço de um round de Muay Thai. Queima 400-600kcal extra.'},
+  ]
+};
+
+// ===== STATE =====
+let prData = JSON.parse(localStorage.getItem('mf-pr') || '{}');
+let medidasData = JSON.parse(localStorage.getItem('mf-medidas') || '[]');
+let foodLog = JSON.parse(localStorage.getItem('mf-food') || '[]');
+let doneExs = new Set(JSON.parse(localStorage.getItem('mf-done') || '[]'));
+let currentDay = 'seg';
+let dayType = 'muay';
+let plateBase64 = null;
+
+const CALS = {
+  muay: {total:'3.400', desc:'Dia de Muay Thai — gasto elevado, mais carbo', prot:'260g', carb:'340g', fat:'90g', num:3400},
+  musc: {total:'2.800', desc:'Dia de musculação — déficit moderado', prot:'250g', carb:'280g', fat:'80g', num:2800},
+  rest: {total:'2.200', desc:'Dia de descanso — menos carbo, mais gordura boa', prot:'240g', carb:'180g', fat:'90g', num:2200},
+};
+
+// ===== TREINO =====
+function renderDay(day) {
+  const exs = TREINOS[day];
+  if (!exs) return;
+  const c = document.getElementById(`ex-${day}`);
+  if (!c || c.innerHTML) return;
+  c.innerHTML = exs.map((ex,i) => {
+    const key = day+'-'+i;
+    const pr = prData[day+'-'+ex.name] || [];
+    const best = pr.length ? Math.max(...pr.map(p=>p.kg)) : null;
+    return `<div class="exc ${doneExs.has(key)?'done':''}" id="exc-${day}-${i}">
+      <div class="exh" onclick="toggleEx('${day}',${i})">
+        <div class="exn">${String(i+1).padStart(2,'0')}</div>
+        <div class="exi"><div class="ex-name">${ex.name}</div><div class="ex-mu">${ex.mu}</div></div>
+        <div class="ex-sv"><div class="sv-n">${ex.s}</div><div class="sv-l">séries</div></div>
+      </div>
+      <div class="exb" id="exb-${day}-${i}">
+        <div class="ex-det">
+          <div class="dbox"><div class="dv">${ex.s}</div><div class="dl2">Séries</div></div>
+          <div class="dbox"><div class="dv" style="font-size:13px">${ex.r}</div><div class="dl2">Reps</div></div>
+          <div class="dbox"><div class="dv">${ex.rest}</div><div class="dl2">Descanso</div></div>
+        </div>
+        <div class="benef"><span style="font-size:16px;flex-shrink:0">🥊</span><div class="benef-txt"><b>Muay Thai:</b> ${ex.ben}</div></div>
+        <div style="margin-bottom:8px">
+          <div style="font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">📊 PR — Carga Usada${best?` <span style="color:var(--green2)">Melhor: ${best}kg</span>`:''}</div>
+          <div class="pr-row">
+            <input class="pr-input" id="pr-inp-${day}-${i}" type="number" placeholder="kg usado hoje">
+            <button class="pr-btn" onclick="savePR('${day}',${i},'${ex.name}')">Salvar PR</button>
+          </div>
+          <div class="pr-history" id="pr-hist-${day}-${i}">${renderPRHist(day, ex.name)}</div>
+        </div>
+        <button class="chk-btn" id="chk-${day}-${i}" onclick="toggleDone('${day}',${i},event)">
+          ${doneExs.has(key)?'✅ Exercício feito!':'Marcar como feito'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderPRHist(day, name) {
+  const pr = prData[day+'-'+name] || [];
+  if (!pr.length) return '<div style="font-size:11px;color:var(--muted);padding:4px 0">Nenhum PR registrado ainda</div>';
+  const sorted = [...pr].reverse().slice(0,4);
+  const best = Math.max(...pr.map(p=>p.kg));
+  return sorted.map(p=>`<div class="pr-entry"><span class="pr-date">${p.date}</span><span class="pr-val">${p.kg}kg ${p.kg===best?'<span class="pr-best">★ PR</span>':''}</span></div>`).join('');
+}
+
+function savePR(day, i, name) {
+  const inp = document.getElementById(`pr-inp-${day}-${i}`);
+  const kg = parseFloat(inp.value);
+  if (!kg) return;
+  const key = day+'-'+name;
+  if (!prData[key]) prData[key] = [];
+  prData[key].push({kg, date: new Date().toLocaleDateString('pt-BR')});
+  localStorage.setItem('mf-pr', JSON.stringify(prData));
+  inp.value = '';
+  document.getElementById(`pr-hist-${day}-${i}`).innerHTML = renderPRHist(day, name);
+}
+
+function toggleEx(day, i) {
+  document.getElementById(`exb-${day}-${i}`).classList.toggle('open');
+}
+
+function toggleDone(day, i, e) {
+  e.stopPropagation();
+  const key = day+'-'+i;
+  const card = document.getElementById(`exc-${day}-${i}`);
+  const btn = document.getElementById(`chk-${day}-${i}`);
+  if (doneExs.has(key)) { doneExs.delete(key); card.classList.remove('done'); btn.textContent='Marcar como feito'; }
+  else { doneExs.add(key); card.classList.add('done'); btn.textContent='✅ Exercício feito!'; }
+  localStorage.setItem('mf-done', JSON.stringify([...doneExs]));
+  document.getElementById('hs-done').textContent = doneExs.size;
+}
+
+function selDay(day, el) {
+  currentDay = day;
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ds-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(`tp-${day}`).classList.add('active');
+  el.classList.add('active');
+  renderDay(day);
+}
+
+// ===== CORPO =====
+function saveMedidas() {
+  const entry = {
+    date: new Date().toLocaleDateString('pt-BR'),
+    peso: document.getElementById('in-peso').value,
+    cintura: document.getElementById('in-cintura').value,
+    peit: document.getElementById('in-peit').value,
+    braco: document.getElementById('in-braco').value,
+    quad: document.getElementById('in-quad').value,
+    coxa: document.getElementById('in-coxa').value,
+  };
+  if (!entry.peso && !entry.cintura) return;
+  medidasData.unshift(entry);
+  localStorage.setItem('mf-medidas', JSON.stringify(medidasData));
+  renderMedidas();
+  renderChart();
+  if (entry.peso) {
+    document.getElementById('hs-peso').textContent = entry.peso;
+    localStorage.setItem('mf-lastpeso', entry.peso);
+  }
+}
+
+function renderMedidas() {
+  if (!medidasData.length) return;
+  const latest = medidasData[0];
+  const prev = medidasData[1];
+  const fields = [{id:'peso',k:'peso',col:'var(--red)'},{id:'cintura',k:'cintura',col:'var(--gold)'},{id:'peit',k:'peit',col:'var(--blue)'},{id:'braco',k:'braco',col:'var(--green2)'}];
+  fields.forEach(f=>{
+    if(latest[f.k]) document.getElementById(`mv-${f.id}`).textContent = latest[f.k];
+    if(prev && prev[f.k] && latest[f.k]) {
+      const diff = (parseFloat(latest[f.k])-parseFloat(prev[f.k])).toFixed(1);
+      const el = document.getElementById(`md-${f.id}`);
+      const isWeight = f.k==='peso'||f.k==='cintura';
+      el.textContent = (diff>0?'+':'')+diff+' desde última vez';
+      el.className = 'met-delta '+(diff<0&&isWeight?'delta-down':diff>0&&!isWeight?'delta-up':diff>0&&isWeight?'delta-up':'delta-down');
+    }
+  });
+  const hist = document.getElementById('medidas-hist');
+  hist.innerHTML = medidasData.slice(0,8).map(e=>`
+    <div class="hist-row">
+      <span class="hist-date">${e.date}</span>
+      <div class="hist-vals">
+        ${e.peso?`<span class="hist-val">${e.peso}<span>kg</span></span>`:''}
+        ${e.cintura?`<span class="hist-val">${e.cintura}<span>cm cin</span></span>`:''}
+        ${e.braco?`<span class="hist-val">${e.braco}<span>cm br</span></span>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function renderChart() {
+  const canvas = document.getElementById('peso-chart');
+  if (!canvas || !medidasData.length) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.parentElement.offsetWidth || 300;
+  canvas.width = w; canvas.height = 140;
+  const pesos = medidasData.filter(e=>e.peso).slice(0,10).reverse();
+  if (pesos.length < 2) return;
+  const vals = pesos.map(e=>parseFloat(e.peso));
+  const min = Math.min(...vals)-2, max = Math.max(...vals)+2;
+  ctx.clearRect(0,0,w,140);
+  ctx.fillStyle='#181818'; ctx.roundRect(0,0,w,140,8); ctx.fill();
+  const pad=20;
+  const sx=i=>(i/(pesos.length-1))*(w-pad*2)+pad;
+  const sy=v=>140-pad-(v-min)/(max-min)*(140-pad*2);
+  ctx.beginPath(); ctx.moveTo(sx(0),sy(vals[0]));
+  for(let i=1;i<vals.length;i++) ctx.lineTo(sx(i),sy(vals[i]));
+  ctx.strokeStyle='#E8391A'; ctx.lineWidth=2; ctx.stroke();
+  vals.forEach((v,i)=>{
+    ctx.beginPath(); ctx.arc(sx(i),sy(v),4,0,Math.PI*2);
+    ctx.fillStyle='#E8391A'; ctx.fill();
+    ctx.fillStyle='#f0ede8'; ctx.font='10px DM Sans'; ctx.textAlign='center';
+    ctx.fillText(v+'kg', sx(i), sy(v)-8);
+  });
+}
+
+// ===== CALORIAS =====
+function setDayType(type, el) {
+  dayType = type;
+  document.querySelectorAll('.tgl').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const d = CALS[type];
+  document.getElementById('cal-total').textContent = d.total;
+  document.getElementById('cal-desc').textContent = d.desc;
+  document.getElementById('cal-prot').textContent = d.prot;
+  document.getElementById('cal-carb').textContent = d.carb;
+  document.getElementById('cal-fat').textContent = d.fat;
+  document.getElementById('cal-goal-lbl').textContent = `Meta: ${d.total} kcal`;
+  document.getElementById('hs-kcal').textContent = d.total;
+  updateCalBar();
+}
+
+function addFood() {
+  const name = document.getElementById('food-name').value.trim();
+  const kcal = parseInt(document.getElementById('food-kcal').value);
+  if (!name || !kcal) return;
+  foodLog.push({name, kcal, date: new Date().toLocaleDateString('pt-BR')});
+  localStorage.setItem('mf-food', JSON.stringify(foodLog));
+  document.getElementById('food-name').value = '';
+  document.getElementById('food-kcal').value = '';
+  renderFoodLog();
+}
+
+function removeFood(i) {
+  foodLog.splice(i,1);
+  localStorage.setItem('mf-food', JSON.stringify(foodLog));
+  renderFoodLog();
+}
+
+function renderFoodLog() {
+  const today = new Date().toLocaleDateString('pt-BR');
+  const todayFoods = foodLog.filter(f=>f.date===today);
+  const total = todayFoods.reduce((a,b)=>a+b.kcal,0);
+  document.getElementById('food-log').innerHTML = todayFoods.length
+    ? todayFoods.map((f,i)=>`<div class="food-item"><span>${f.name}</span><span class="food-kcal">${f.kcal} kcal</span><button class="del-btn" onclick="removeFood(${foodLog.indexOf(f)})">×</button></div>`).join('')
+    : '<div style="font-size:13px;color:var(--muted2);padding:10px 0;text-align:center">Nenhum alimento adicionado hoje</div>';
+  document.getElementById('consumed-total').textContent = total + ' kcal';
+  updateCalBar(total);
+}
+
+function updateCalBar(consumed) {
+  const goal = CALS[dayType].num;
+  const pct = Math.min(((consumed||0)/goal)*100, 100);
+  const bar = document.getElementById('cal-progress-bar');
+  bar.style.width = pct+'%';
+  bar.style.background = pct > 90 ? 'var(--red)' : pct > 70 ? 'var(--gold)' : 'var(--green2)';
+}
+
+// ===== AI PLATE =====
+let plateFile = null;
+function handlePlateFile(e) {
+  plateFile = e.target.files[0];
+  showPreview(plateFile);
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-area').classList.remove('dragover');
+  plateFile = e.dataTransfer.files[0];
+  showPreview(plateFile);
+}
+function showPreview(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    plateBase64 = ev.target.result.split(',')[1];
+    const img = document.getElementById('preview-img');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    document.getElementById('analyze-btn').classList.add('show');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function analyzePlate() {
+  if (!plateBase64) return;
+  const btn = document.getElementById('analyze-btn');
+  const area = document.getElementById('ai-result-area');
+  btn.disabled = true; btn.textContent = 'Analisando...';
+  area.innerHTML = `<div class="ai-loading"><div class="spin"></div><div>IA analisando seu prato...</div></div>`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: [
+            {type:'image', source:{type:'base64', media_type:'image/jpeg', data: plateBase64}},
+            {type:'text', text:`Você é um nutricionista esportivo especializado. Analise este prato e retorne APENAS JSON válido sem markdown, sem texto antes ou depois, no seguinte formato:
+{
+  "alimentos": [
+    {"nome": "nome do alimento", "porcao": "quantidade estimada", "kcal": numero_inteiro, "proteina": numero_inteiro, "carb": numero_inteiro, "gordura": numero_inteiro}
+  ],
+  "total_kcal": numero_inteiro,
+  "total_proteina": numero_inteiro,
+  "total_carb": numero_inteiro,
+  "total_gordura": numero_inteiro,
+  "score_fit": numero_de_0_a_100,
+  "avaliacao": "frase curta de 1 linha sobre adequação para treino e perda de gordura",
+  "recomendacao": "1 sugestão objetiva de melhoria"
+}`}
+          ]
+        }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content.map(b=>b.text||'').join('');
+    const clean = text.replace(/```json|```/g,'').trim();
+    const result = JSON.parse(clean);
+    renderPlateResult(result);
+  } catch(err) {
+    area.innerHTML = `<div class="ai-result" style="text-align:center;color:var(--red2)">Erro na análise. Verifique a imagem e tente novamente.</div>`;
+  }
+  btn.disabled = false; btn.textContent = '🧠 Analisar novamente';
+}
+
+function renderPlateResult(r) {
+  const scoreColor = r.score_fit>=70?'var(--green2)':r.score_fit>=45?'var(--gold)':'var(--red2)';
+  const area = document.getElementById('ai-result-area');
+  area.innerHTML = `
+    <div class="ai-result">
+      <div class="card-title" style="margin-bottom:8px">Alimentos identificados</div>
+      ${r.alimentos.map(a=>`
+        <div class="ai-food-row">
+          <div><div style="font-size:13px;font-weight:500">${a.nome}</div><div style="font-size:11px;color:var(--muted2)">${a.porcao} · P:${a.proteina}g C:${a.carb}g G:${a.gordura}g</div></div>
+          <span class="ai-kcal">${a.kcal} kcal</span>
+        </div>`).join('')}
+      <div class="ai-total"><span class="ai-total-lbl">Total do prato</span><span class="ai-total-val">${r.total_kcal} kcal</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0;">
+        <div class="dbox"><div class="dv" style="color:var(--red2)">${r.total_proteina}g</div><div class="dl2">Proteína</div></div>
+        <div class="dbox"><div class="dv" style="color:#6fa3f5">${r.total_carb}g</div><div class="dl2">Carb</div></div>
+        <div class="dbox"><div class="dv" style="color:var(--gold)">${r.total_gordura}g</div><div class="dl2">Gordura</div></div>
+      </div>
+    </div>
+    <div class="ai-result">
+      <div class="fit-score">
+        <div class="fit-score-num" style="color:${scoreColor}">${r.score_fit}</div>
+        <div class="fit-score-lbl">Score Fitness / 100</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:${r.score_fit}%;background:${scoreColor}"></div></div>
+      </div>
+      <div style="font-size:13px;color:var(--muted3);margin-top:8px;padding:10px;background:var(--s2);border-radius:8px;line-height:1.5">${r.avaliacao}</div>
+      <div style="font-size:12px;color:var(--green2);margin-top:8px;padding:10px;background:rgba(42,157,92,.06);border:1px solid rgba(42,157,92,.15);border-radius:8px">💡 ${r.recomendacao}</div>
+      <button onclick="addPlateToLog(${r.total_kcal})" style="width:100%;margin-top:10px;padding:10px;border-radius:8px;background:var(--green);color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer">+ Adicionar ao log de hoje</button>
+    </div>`;
+}
+
+function addPlateToLog(kcal) {
+  foodLog.push({name:'Prato analisado pela IA', kcal, date:new Date().toLocaleDateString('pt-BR')});
+  localStorage.setItem('mf-food', JSON.stringify(foodLog));
+  renderFoodLog();
+  showSec('calorias');
+  document.querySelectorAll('.nb').forEach((b,i)=>{if(i===2)b.classList.add('active');else b.classList.remove('active');});
+}
+
+// ===== TIMER =====
+let workT=45, restT=15, curT=45, isWork=true, round=1, totalR=8, running=false, timerInt=null;
+function setPreset(w,r,el) {
+  document.querySelectorAll('.tpreset').forEach(b=>b.classList.remove('active')); el.classList.add('active');
+  workT=w; restT=r; resetTimer();
+}
+function toggleTimer() {
+  if (running) { clearInterval(timerInt); running=false; document.getElementById('t-start').textContent='CONTINUAR'; }
+  else { running=true; document.getElementById('t-start').textContent='PAUSAR'; timerInt=setInterval(tick,1000); }
+}
+function tick() {
+  curT--;
+  if (curT<=0) {
+    if (isWork) { isWork=false; curT=restT; addRoundDot(); }
+    else { isWork=true; curT=workT; round++; document.getElementById('t-round').textContent=Math.min(round,totalR); }
+    if (round>totalR) { resetTimer(); return; }
+  }
+  updateTimerUI();
+}
+function addRoundDot() {
+  const dots = document.getElementById('round-dots');
+  const d=document.createElement('div'); d.className='rdot'; d.textContent=round; dots.appendChild(d);
+  document.getElementById('t-completed').textContent=round;
+}
+function updateTimerUI() {
+  const m=String(Math.floor(curT/60)).padStart(2,'0'), s=String(curT%60).padStart(2,'0');
+  const el=document.getElementById('t-disp');
+  el.textContent=`${m}:${s}`; el.className='t-disp '+(isWork?'work':'rest');
+  document.getElementById('t-lbl').textContent=isWork?'TRABALHO':'DESCANSO';
+}
+function resetTimer() {
+  clearInterval(timerInt); running=false; isWork=true; curT=workT; round=1;
+  document.getElementById('t-start').textContent='INICIAR';
+  document.getElementById('t-round').textContent=1;
+  document.getElementById('t-completed').textContent=0;
+  document.getElementById('round-dots').innerHTML='';
+  updateTimerUI();
+}
+
+// ===== SHAPE IA =====
+let shapeBase64 = null;
+let shapeAngle = 'frente';
+let shapeHistory = JSON.parse(localStorage.getItem('mf-shape-hist') || '[]');
+
+function setShapeAngle(angle, el) {
+  shapeAngle = angle;
+  document.querySelectorAll('#ang-frente,#ang-lado,#ang-costas').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function handleShapeFile(e) {
+  const file = e.target.files[0];
+  if (file) showShapePreview(file);
+}
+function handleShapeDrop(e) {
+  e.preventDefault();
+  document.getElementById('shape-upload-area').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) showShapePreview(file);
+}
+function showShapePreview(file) {
+  const reader = new FileReader();
+  reader.onload = ev => {
+    shapeBase64 = ev.target.result.split(',')[1];
+    const img = document.getElementById('shape-preview');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    document.getElementById('shape-analyze-btn').classList.add('show');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function analyzeShape() {
+  if (!shapeBase64) return;
+  const btn = document.getElementById('shape-analyze-btn');
+  const area = document.getElementById('shape-result-area');
+  btn.disabled = true; btn.textContent = 'Analisando...';
+  area.innerHTML = `<div class="ai-loading"><div class="spin"></div><div style="font-size:13px;margin-top:8px">IA avaliando composição e shape...</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Isso pode levar alguns segundos</div></div>`;
+
+  const prompt = `Você é um personal trainer e nutricionista esportivo de elite, especializado em Muay Thai e recomposição corporal. Analise esta foto de corpo (ângulo: ${shapeAngle}) de um atleta de 180cm, 125kg que treina Muay Thai 3x/semana e musculação 6x/semana com foco em perder gordura e ganhar massa.
+
+Retorne APENAS JSON válido sem markdown, sem texto antes ou depois:
+{
+  "gordura_estimada": "X-Y%",
+  "tipo_fisico": "nome do biotipo",
+  "score_geral": número de 0 a 100,
+  "pontos_fortes": ["ponto 1","ponto 2","ponto 3"],
+  "pontos_fracos": ["ponto 1","ponto 2","ponto 3"],
+  "grupos_prioritarios": ["músculo 1","músculo 2","músculo 3"],
+  "vantagens_muay_thai": ["vantagem 1","vantagem 2"],
+  "desequilibrios": ["desequilíbrio 1","desequilíbrio 2"],
+  "postura": "avaliação objetiva de 1-2 frases",
+  "ajuste_treino": ["ajuste específico 1","ajuste específico 2","ajuste específico 3"],
+  "plano_4_semanas": "descrição do foco principal para as próximas 4 semanas em 2-3 frases",
+  "mensagem_motivacional": "frase curta de incentivo personalizada"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1200,
+        messages: [{
+          role: 'user',
+          content: [
+            {type:'image', source:{type:'base64', media_type:'image/jpeg', data: shapeBase64}},
+            {type:'text', text: prompt}
+          ]
+        }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content.map(b => b.text||'').join('');
+    const clean = text.replace(/```json|```/g,'').trim();
+    const result = JSON.parse(clean);
+    renderShapeResult(result);
+    saveShapeHistory(result);
+  } catch(err) {
+    area.innerHTML = `<div class="ai-result" style="text-align:center;color:var(--red2);padding:20px">Erro na análise. Verifique a imagem e tente novamente.</div>`;
+  }
+  btn.disabled = false; btn.textContent = '💪 Analisar novamente';
+}
+
+function renderShapeResult(r) {
+  const scoreColor = r.score_geral >= 70 ? 'var(--green2)' : r.score_geral >= 45 ? 'var(--gold)' : 'var(--red2)';
+  const area = document.getElementById('shape-result-area');
+  area.innerHTML = `
+    <div style="margin-top:14px">
+      <div class="ai-result">
+        <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
+          <div style="text-align:center;flex-shrink:0">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:60px;color:${scoreColor};line-height:1">${r.score_geral}</div>
+            <div style="font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px">Score Shape</div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500;margin-bottom:4px">${r.tipo_fisico}</div>
+            <div style="font-size:12px;color:var(--muted2);margin-bottom:6px">Gordura estimada: <span style="color:var(--gold);font-weight:500">${r.gordura_estimada}</span></div>
+            <div class="score-bar-wrap"><div class="score-bar" style="width:${r.score_geral}%;background:${scoreColor}"></div></div>
+          </div>
+        </div>
+        <div style="background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:8px;padding:12px;font-size:13px;font-style:italic;color:var(--gold2);text-align:center">"${r.mensagem_motivacional}"</div>
+      </div>
+
+      <div class="ai-result">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <div style="font-size:11px;font-weight:500;color:var(--green2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">✅ Pontos Fortes</div>
+            ${r.pontos_fortes.map(p=>`<div style="font-size:12px;color:var(--muted3);padding:4px 0;border-bottom:1px solid var(--border);line-height:1.4">${p}</div>`).join('')}
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:500;color:var(--red2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">⚠️ A Melhorar</div>
+            ${r.pontos_fracos.map(p=>`<div style="font-size:12px;color:var(--muted3);padding:4px 0;border-bottom:1px solid var(--border);line-height:1.4">${p}</div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-result">
+        <div style="font-size:11px;font-weight:500;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">🥊 Análise para Muay Thai</div>
+        <div style="margin-bottom:10px">
+          <div style="font-size:11px;color:var(--muted2);margin-bottom:6px">Vantagens no combate</div>
+          ${r.vantagens_muay_thai.map(v=>`<div style="font-size:12px;color:var(--green2);padding:4px 0;border-bottom:1px solid var(--border)">${v}</div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--muted2);margin-bottom:6px">Desequilíbrios a corrigir</div>
+          ${r.desequilibrios.map(d=>`<div style="font-size:12px;color:var(--muted3);padding:4px 0;border-bottom:1px solid var(--border)">${d}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="ai-result">
+        <div style="font-size:11px;font-weight:500;color:#6fa3f5;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📐 Postura</div>
+        <div style="font-size:13px;color:var(--muted3);line-height:1.6;margin-bottom:12px">${r.postura}</div>
+        <div style="font-size:11px;font-weight:500;color:var(--red2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🎯 Grupos Prioritários</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          ${r.grupos_prioritarios.map(g=>`<span style="background:rgba(232,57,26,.1);border:1px solid rgba(232,57,26,.2);color:var(--red2);font-size:11px;padding:4px 10px;border-radius:20px">${g}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="ai-result" style="background:rgba(42,157,92,.06);border-color:rgba(42,157,92,.2)">
+        <div style="font-size:11px;font-weight:500;color:var(--green2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">📅 Plano — Próximas 4 Semanas</div>
+        <div style="font-size:13px;color:var(--muted3);line-height:1.7;margin-bottom:12px">${r.plano_4_semanas}</div>
+        <div style="font-size:11px;color:var(--muted2);margin-bottom:8px">Ajustes específicos de treino</div>
+        ${r.ajuste_treino.map((a,i)=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted3)"><span style="font-family:'Space Mono',monospace;color:var(--green2);flex-shrink:0">${String(i+1).padStart(2,'0')}</span><span>${a}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function saveShapeHistory(result) {
+  const entry = {
+    date: new Date().toLocaleDateString('pt-BR'),
+    angle: shapeAngle,
+    score: result.score_geral,
+    gordura: result.gordura_estimada,
+    tipo: result.tipo_fisico
+  };
+  shapeHistory.unshift(entry);
+  if (shapeHistory.length > 10) shapeHistory.pop();
+  localStorage.setItem('mf-shape-hist', JSON.stringify(shapeHistory));
+  renderShapeHistory();
+}
+
+function renderShapeHistory() {
+  if (!shapeHistory.length) return;
+  const card = document.getElementById('shape-history-card');
+  const hist = document.getElementById('shape-history');
+  card.style.display = 'block';
+  hist.innerHTML = shapeHistory.map(e => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px">
+      <div><div style="font-weight:500">${e.date} — ${e.angle}</div><div style="font-size:11px;color:var(--muted2)">${e.tipo} · ${e.gordura}</div></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:${e.score>=70?'var(--green2)':e.score>=45?'var(--gold)':'var(--red2)'}">${e.score}</div>
+    </div>`).join('');
+}
+
+
+function showSec(id, el) {
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.bbb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if (el) { el.classList.add('active'); }
+  if (id==='corpo') { renderMedidas(); setTimeout(renderChart,100); }
+  if (id==='calorias') renderFoodLog();
+  if (id==='shape') renderShapeHistory();
+}
+
+// ===== INIT =====
+renderDay('seg');
+renderFoodLog();
+renderMedidas();
+document.getElementById('hs-done').textContent = doneExs.size;
+const savedPeso = localStorage.getItem('mf-lastpeso');
+if (savedPeso) document.getElementById('hs-peso').textContent = savedPeso;
+updateTimerUI();
+</script>
+</body>
+</html>
