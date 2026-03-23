@@ -460,6 +460,18 @@ canvas{border-radius:8px;}
 <!-- ======= PRATO IA ======= -->
 <div id="sec-prato" class="sec">
   <p class="sh">Análise de Prato com IA</p>
+
+  <!-- CARD CHAVE GEMINI -->
+  <div class="card" id="prato-key-card" style="background:rgba(46,111,232,.06);border-color:rgba(46,111,232,.25)">
+    <div class="card-title">🔑 Chave do Gemini (Google)</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:10px;line-height:1.6">Cole aqui a sua chave do Gemini. Acesse <b style="color:#6fa3f5">aistudio.google.com</b> → Get API Key → Create API Key.</div>
+    <div style="display:flex;gap:8px">
+      <input id="prato-key-input" type="text" class="pr-input" placeholder="AIzaSy..." style="flex:1;font-family:'Space Mono',monospace;font-size:12px">
+      <button onclick="salvarChavePrato()" style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">Salvar</button>
+    </div>
+    <div id="prato-key-status" style="font-size:11px;margin-top:8px;color:var(--muted2)"></div>
+  </div>
+
   <div class="card">
     <div class="upload-area" id="upload-area" onclick="document.getElementById('plate-input').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
       <div class="upload-icon">📸</div>
@@ -474,10 +486,10 @@ canvas{border-radius:8px;}
   <div class="card">
     <div class="card-title">Como usar</div>
     <div style="font-size:13px;color:var(--muted2);line-height:1.8">
-      1. Fotografe seu prato antes de comer<br>
-      2. Toque em "Analisar com IA"<br>
-      3. A IA identifica cada alimento e estima as calorias<br>
-      4. Os valores são adicionados ao seu log do dia automaticamente<br>
+      1. Cole sua chave do Gemini no campo acima<br>
+      2. Fotografe seu prato antes de comer<br>
+      3. Toque em "Analisar com IA"<br>
+      4. A IA identifica cada alimento e estima as calorias
       <div style="margin-top:10px;padding:10px;background:rgba(232,57,26,.06);border:1px solid rgba(232,57,26,.12);border-radius:8px;font-size:11px;color:var(--muted3)">Estimativas baseadas em porções visuais. Para maior precisão, use uma balança alimentar.</div>
     </div>
   </div>
@@ -486,6 +498,17 @@ canvas{border-radius:8px;}
 <!-- ======= SHAPE IA ======= -->
 <div id="sec-shape" class="sec">
   <p class="sh">Análise de Shape com IA</p>
+
+  <!-- CARD CHAVE GEMINI -->
+  <div class="card" id="shape-key-card" style="background:rgba(46,111,232,.06);border-color:rgba(46,111,232,.25)">
+    <div class="card-title">🔑 Chave do Gemini (Google)</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:10px;line-height:1.6">Cole aqui a sua chave do Gemini. Acesse <b style="color:#6fa3f5">aistudio.google.com</b> → Get API Key → Create API Key.</div>
+    <div style="display:flex;gap:8px">
+      <input id="shape-key-input" type="text" class="pr-input" placeholder="AIzaSy..." style="flex:1;font-family:'Space Mono',monospace;font-size:12px">
+      <button onclick="salvarChaveShape()" style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">Salvar</button>
+    </div>
+    <div id="shape-key-status" style="font-size:11px;margin-top:8px;color:var(--muted2)"></div>
+  </div>
   <div class="card" style="background:linear-gradient(135deg,rgba(232,57,26,.08),rgba(212,168,67,.05));border-color:rgba(232,57,26,.2)">
     <div style="display:flex;gap:12px;align-items:center">
       <div style="font-size:32px">🤖</div>
@@ -510,6 +533,7 @@ canvas{border-radius:8px;}
     <input type="file" id="shape-input" accept="image/*" onchange="handleShapeFile(event)">
     <img id="shape-preview" class="preview-img" alt="Preview shape">
     <button class="analyze-btn" id="shape-analyze-btn" onclick="analyzeShape()">💪 Analisar Shape com IA</button>
+    <div style="text-align:center;margin-top:8px"><button onclick="showApiKeyModal(analyzeShape)" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif">🔑 Alterar chave do Gemini</button></div>
     <div id="shape-result-area"></div>
   </div>
   <div class="card">
@@ -1049,20 +1073,63 @@ function showPreview(file) {
 }
 
 // ===== GEMINI API (GRATUITO) =====
-const DEFAULT_GEMINI_KEY = 'AIzaSyCfB5qUepzfLPjIsZX5wUnA88VG4Ra59DE';
-function getApiKey() { return localStorage.getItem('mf-gemini-key')||DEFAULT_GEMINI_KEY; }
+function getApiKey() { return localStorage.getItem('mf-gemini-key')||''; }
 function saveApiKey(k) { localStorage.setItem('mf-gemini-key', k.trim()); }
-function promptApiKey(callback) { callback(getApiKey()); }
+function promptApiKey(callback) {
+  const saved = getApiKey();
+  if (saved) { callback(saved); return; }
+  // Sem chave — avisa o usuário onde inserir
+  alert('Cole sua chave do Gemini no campo "🔑 Chave do Gemini" que aparece no topo desta tela.');
+}
+function resetApiKey() {
+  localStorage.removeItem('mf-gemini-key');
+  atualizarStatusChaves();
+}
 function showApiKeyModal(callback) {
-  const modal = document.getElementById('modal-apikey');
-  modal.style.display = 'flex';
-  document.getElementById('apikey-confirm').onclick = () => {
-    const k = document.getElementById('apikey-input').value.trim();
-    if (k.length < 10) { document.getElementById('apikey-error').style.display='block'; return; }
-    saveApiKey(k);
-    modal.style.display = 'none';
-    if (callback) callback(k);
-  };
+  // Mantido para compatibilidade — redireciona para o campo visível
+  alert('Cole sua chave do Gemini no campo "🔑 Chave do Gemini" que aparece no topo desta tela.');
+}
+function salvarChavePrato() {
+  const k = document.getElementById('prato-key-input').value.trim();
+  if (!k || k.length < 15) {
+    document.getElementById('prato-key-status').textContent = '⚠️ Chave inválida. Verifique e tente novamente.';
+    document.getElementById('prato-key-status').style.color = 'var(--red2)';
+    return;
+  }
+  saveApiKey(k);
+  document.getElementById('prato-key-input').value = '';
+  document.getElementById('prato-key-status').textContent = '✅ Chave salva! Agora pode analisar.';
+  document.getElementById('prato-key-status').style.color = 'var(--green2)';
+  // Sync com shape
+  const shapeInp = document.getElementById('shape-key-input');
+  if (shapeInp) { shapeInp.value = ''; }
+  const shapeStatus = document.getElementById('shape-key-status');
+  if (shapeStatus) { shapeStatus.textContent = '✅ Chave salva!'; shapeStatus.style.color = 'var(--green2)'; }
+}
+function salvarChaveShape() {
+  const k = document.getElementById('shape-key-input').value.trim();
+  if (!k || k.length < 15) {
+    document.getElementById('shape-key-status').textContent = '⚠️ Chave inválida. Verifique e tente novamente.';
+    document.getElementById('shape-key-status').style.color = 'var(--red2)';
+    return;
+  }
+  saveApiKey(k);
+  document.getElementById('shape-key-input').value = '';
+  document.getElementById('shape-key-status').textContent = '✅ Chave salva! Agora pode analisar.';
+  document.getElementById('shape-key-status').style.color = 'var(--green2)';
+}
+function atualizarStatusChaves() {
+  const temChave = !!getApiKey();
+  const pratoStatus = document.getElementById('prato-key-status');
+  const shapeStatus = document.getElementById('shape-key-status');
+  if (pratoStatus) {
+    pratoStatus.textContent = temChave ? '✅ Chave configurada — pronta para usar' : 'Nenhuma chave configurada ainda.';
+    pratoStatus.style.color = temChave ? 'var(--green2)' : 'var(--muted2)';
+  }
+  if (shapeStatus) {
+    shapeStatus.textContent = temChave ? '✅ Chave configurada — pronta para usar' : 'Nenhuma chave configurada ainda.';
+    shapeStatus.style.color = temChave ? 'var(--green2)' : 'var(--muted2)';
+  }
 }
 
 async function callAI(apiKey, prompt, imageBase64, imageMime) {
@@ -1393,7 +1460,8 @@ function showSec(id, el) {
   if (id==='calorias') renderFoodLog();
   if (id==='shape') renderShapeHistory();
   if (id==='refeicoes') renderDieta();
-  if (id==='dashboard') { setTimeout(renderDashboard,50); }
+  if (id==='prato') atualizarStatusChaves();
+  if (id==='shape') atualizarStatusChaves();
   if (id==='recuperacao') { renderRecHistorico(); renderRecAlerta(); document.getElementById('rec-date').textContent=new Date().toLocaleDateString('pt-BR'); }
   if (id==='agua') { initAgua(); }
   if (id==='relatorio') { renderRelResumo(); renderRelHistorico(); }
@@ -1981,6 +2049,7 @@ renderDieta();
 initAgua();
 renderRecHistorico();
 renderRelHistorico();
+atualizarStatusChaves();
 // Load custom treinos if saved
 if (customTreinos) { Object.keys(customTreinos).forEach(day => { TREINOS[day] = customTreinos[day]; }); }
 document.getElementById('hs-done').textContent = doneExs.size;
@@ -1989,21 +2058,24 @@ if (savedPeso) document.getElementById('hs-peso').textContent = savedPeso;
 updateTimerUI();
 </script>
 <!-- MODAL API KEY -->
-<div id="modal-apikey" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;display:none;align-items:center;justify-content:center;padding:20px;">
+<div id="modal-apikey" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center;padding:20px;">
   <div style="background:var(--s1);border:1px solid var(--border2);border-radius:16px;padding:24px;max-width:380px;width:100%">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;margin-bottom:6px">🔑 Chave de API</div>
-    <div style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:16px">
-      Para usar a IA de análise de prato, shape e relatório, você precisa de uma chave de API da Anthropic.<br><br>
-      <b style="color:var(--text)">Como obter gratuitamente:</b><br>
-      1. Acesse <b style="color:var(--gold)">console.anthropic.com</b><br>
-      2. Crie uma conta gratuita<br>
-      3. Vá em "API Keys" → "Create Key"<br>
-      4. Cole a chave abaixo
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;margin-bottom:6px">🔑 Chave do Gemini</div>
+    <div style="font-size:13px;color:var(--muted2);line-height:1.8;margin-bottom:16px">
+      A IA usa o <b style="color:var(--text)">Gemini do Google — gratuito</b>.<br>
+      A chave fica salva só no seu iPhone.<br><br>
+      <b style="color:var(--gold)">Como obter em 1 minuto:</b><br>
+      1. Acesse <b style="color:#6fa3f5">aistudio.google.com</b><br>
+      2. Entre com sua conta Google<br>
+      3. Clique em <b style="color:var(--text)">"Get API Key"</b><br>
+      4. Clique em <b style="color:var(--text)">"Create API Key"</b><br>
+      5. Cole a chave abaixo (começa com AIza...)
     </div>
-    <input id="apikey-input" type="password" class="pr-input" placeholder="sk-ant-api03-..." style="width:100%;margin-bottom:8px;font-family:'Space Mono',monospace;font-size:12px">
-    <div id="apikey-error" style="display:none;font-size:12px;color:var(--red2);margin-bottom:8px">⚠️ Chave inválida. Deve começar com sk-ant-</div>
-    <button id="apikey-confirm" style="width:100%;padding:12px;border-radius:8px;background:var(--red);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;margin-bottom:8px">Salvar e Continuar</button>
-    <div style="font-size:11px;color:var(--muted);text-align:center">A chave fica salva só no seu iPhone. Não é compartilhada com ninguém.</div>
+    <input id="apikey-input" type="text" class="pr-input" placeholder="AIzaSy..." style="width:100%;margin-bottom:8px;font-family:'Space Mono',monospace;font-size:12px">
+    <div id="apikey-error" style="display:none;font-size:12px;color:var(--red2);margin-bottom:8px">⚠️ Chave muito curta. Verifique e tente novamente.</div>
+    <button id="apikey-confirm" style="width:100%;padding:12px;border-radius:8px;background:var(--red);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;margin-bottom:8px">✅ Salvar e Continuar</button>
+    <button onclick="document.getElementById('modal-apikey').style.display='none'" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer">Cancelar</button>
+    <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:10px">🔒 A chave é salva apenas no seu dispositivo</div>
   </div>
 </div>
 
